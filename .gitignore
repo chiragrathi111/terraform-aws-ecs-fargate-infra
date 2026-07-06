@@ -1,0 +1,32 @@
+# Terraform state files (contain sensitive resource info)
+*.tfstate
+*.tfstate.*
+
+# Terraform directory (provider plugins, modules cache)
+.terraform/
+.terraform.lock.hcl
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Variable override files (may contain secrets)
+*.tfvars.local
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
