@@ -1,0 +1,36 @@
+Insert 100 records using below commands:-
+
+INSERT INTO hotel_bookings
+SELECT
+gen_random_uuid(),
+gen_random_uuid(),
+'HTL-' || gs,
+CASE
+WHEN gs % 5 = 0 THEN 'Delhi'
+WHEN gs % 5 = 1 THEN 'Mumbai'
+WHEN gs % 5 = 2 THEN 'Hyderabad'
+WHEN gs % 5 = 3 THEN 'Pune'
+ELSE 'Chennai'
+END,
+CURRENT_DATE,
+CURRENT_DATE + 2,
+1000 + gs * 100,
+CASE
+WHEN gs % 4 = 0 THEN 'CONFIRMED'
+WHEN gs % 4 = 1 THEN 'PENDING'
+WHEN gs % 4 = 2 THEN 'CANCELLED'
+ELSE 'COMPLETED'
+END,
+NOW() - (gs || ' days')::interval
+FROM generate_series(1,100) gs;
+
+get datas :-
+
+SELECT org_id,
+       status,
+       COUNT(*),
+       SUM(amount)
+FROM hotel_bookings
+WHERE city='Delhi'
+AND created_at>=NOW()-INTERVAL '30 days'
+GROUP BY org_id,status;
